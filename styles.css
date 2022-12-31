@@ -28,19 +28,23 @@ header > p {
 /*All Css for the form is found below*/
 
 form {
-    text-align: center;
     margin: 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 form > div {
     display: flex;
     flex-direction: column;
+    align-items: start;
+    margin: 1rem 3vw;
 }
 
 input[type="text"], input[type="number"] {
     border: 1px solid #cccccc;
     border-radius: 5px;
     padding: 2px;
+    width: 10rem;
 }
 
 /*All CSS for the table is found below*/
