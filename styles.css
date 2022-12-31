@@ -25,6 +25,20 @@ header > p {
     padding-top: 0.4rem;
 }
 
+/*All Css for the form is found below*/
+
+form {
+    text-align: center;
+    margin: 1rem;
+}
+
+input[type="text"], input[type="number"] {
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+/*All CSS for the table is found below*/
 table {
     margin: 1rem auto;
     border-collapse: collapse;
