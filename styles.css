@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+header {
+    width: 100vw;
+    height: 10rem;
+    text-align: center;
+    background-color: #eeeeee;
+}
+
+h1 {
+    font-size: 4rem;
+    padding-top: 1rem;
+}
+
+header > p {
+    font-size: 1.3rem;
+    padding-top: 0.4rem;
+}
