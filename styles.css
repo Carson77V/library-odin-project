@@ -29,6 +29,7 @@ header > p {
 
 form {
     margin: 1rem;
+    margin-bottom: 0;
     display: flex;
     justify-content: center;
 }
@@ -53,6 +54,28 @@ input[type="text"], input[type="number"] {
 
 input[type="checkbox"] {
     margin: auto;
+    height: 1.3rem;
+    width: 1.5rem;
+}
+
+/* All CSS for Submit button*/
+
+.submit {
+    display: flex;
+    justify-content: center;
+}
+
+.submit > button {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 3px 8px;
+    height: 2rem;
+    width: 8rem;
+}
+
+.submit > button:hover {
+    background-color: black;
+    color: white;
 }
 
 /*All CSS for the table is found below*/
