@@ -2,7 +2,7 @@
 let myLibrary = [];
 
 // constructor for book object
-function Book() {
+function Book(title, author, pages, read) {
     this.title = title,
     this.author = author,
     this.pages = pages,
@@ -10,8 +10,15 @@ function Book() {
 }
 
 function addBookToLibrary() {
-    myLibrary.push(Book);
-    let index = myLibrary.length - 1;
+    let index = myLibrary.length;
+    let titleData = title.value;
+    let authorData = author.value;
+    let pagesData = pages.value;
+    let readData = false;
+    if (read.checked === true) {
+        readData = true;
+    }
+    myLibrary[index] = new Book(titleData, authorData, pagesData, readData);
     myLibrary[index].index = index;
 }
 
@@ -33,6 +40,7 @@ submitButton.addEventListener('click', () => {
     let read = document.querySelector('#read');
 
     checkInput(title, author, pages);
+    addBookToLibrary();
     deleteContent(title, author, pages, read);
 });
 
