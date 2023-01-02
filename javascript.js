@@ -47,6 +47,7 @@ function displayNewBook() {
         read.appendChild(readBtn);
 
         const deleteCell = document.createElement('td');
+        deleteCell.classList.add('delete');
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = "Delete";
         deleteCell.appendChild(deleteBtn);
