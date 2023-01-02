@@ -9,6 +9,8 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
+//Function reads the data from the inputs and uses a constructor to 
+//create an object and saves it to the array myLibrary[]
 function addBookToLibrary() {
     let index = myLibrary.length;
     let titleData = title.value;
@@ -22,13 +24,43 @@ function addBookToLibrary() {
     myLibrary[index].index = index;
 }
 
-function displayBooks() {
-    for (let books in myLibrary) {
-        const book = document.querySelector('tbody');
+function displayNewBook() {
+    let i = myLibrary.length - 1;
+        //select the body of the table
+        const list = document.querySelector('tbody');
+        //create a new table row
+        const book = document.createElement('tr');
+        list.appendChild(book);
+        //create all the elements for the table
+        const title = document.createElement('td');
+        title.textContent = myLibrary[i].title;
+        const author = document.createElement('td');
+        author.textContent = myLibrary[i].author;
+        const pages = document.createElement('td');
+        pages.textContent = myLibrary[i].pages;
 
-    }
+        //
+        const read = document.createElement('td');
+        const readBtn = document.createElement('button');
+        readBtn.textContent = "Not Read";
+        if (myLibrary[i].read === true) readBtn.textContent = "Read";
+        read.appendChild(readBtn);
+
+        const deleteCell = document.createElement('td');
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = "Delete";
+        deleteCell.appendChild(deleteBtn);
+
+        book.appendChild(title);
+        book.appendChild(author);
+        book.appendChild(pages);
+        book.appendChild(read);
+        book.appendChild(deleteCell);
+
+    
 }
 
+//Event that takes place when submit button is clicked
 const submitButton = document.querySelector('.submit > button');
 submitButton.addEventListener('click', () => {
     //prevent the button from submitting anything
@@ -42,6 +74,7 @@ submitButton.addEventListener('click', () => {
     checkInput(title, author, pages);
     addBookToLibrary();
     deleteContent(title, author, pages, read);
+    displayNewBook();
 });
 
 
