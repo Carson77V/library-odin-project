@@ -27,14 +27,14 @@ header > p {
 
 /*All Css for the form is found below*/
 
-form {
+.form-flex {
     margin: 1rem;
     margin-bottom: 0;
     display: flex;
     justify-content: center;
 }
 
-form > div {
+form > div > div {
     display: flex;
     flex-direction: column;
     align-items: start;

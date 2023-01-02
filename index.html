@@ -15,27 +15,28 @@
   </header>
 
   <form action="" method="post">
-    <div>
-      <label for="title">Title</label>
-      <input type="text" id="title" name="book-title" required>
+    <div class="form-flex">
+      <div>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="book-title" required>
+      </div>
+      <div>
+        <label for="author">Author</label>
+        <input type="text" id="author" name="author-name" required>
+      </div>
+      <div>
+        <label for="pages">Pages</label>
+        <input type="number" id="pages" name="page-count" required>
+      </div>
+      <div>
+        <label for="isRead">Have you read it?</label>
+        <input type="checkbox" id="isRead" name="isRead">
+      </div>
     </div>
-    <div>
-      <label for="author">Author</label>
-      <input type="text" id="author" name="author-name" required>
-    </div>
-    <div>
-      <label for="pages">Pages</label>
-      <input type="number" id="pages" name="page-count" required>
-    </div>
-    <div>
-      <label for="isRead">Have you read it?</label>
-      <input type="checkbox" id="isRead" name="isRead">
+    <div class="submit">
+      <button>Submit Form</button>
     </div>
   </form>
-
-  <div class="submit">
-    <button>Submit Form</button>
-  </div>
 
   <table>
     <thead>
