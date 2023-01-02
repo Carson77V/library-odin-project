@@ -40,11 +40,19 @@ form > div {
     margin: 1rem 3vw;
 }
 
+label {
+    font-weight: bold;
+}
+
 input[type="text"], input[type="number"] {
     border: 1px solid #cccccc;
     border-radius: 5px;
     padding: 2px;
     width: 10rem;
+}
+
+input[type="checkbox"] {
+    margin: auto;
 }
 
 /*All CSS for the table is found below*/
