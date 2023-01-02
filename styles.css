@@ -73,11 +73,6 @@ input[type="checkbox"] {
     width: 8rem;
 }
 
-.submit > button:hover {
-    background-color: black;
-    color: white;
-}
-
 /*All CSS for the table is found below*/
 table {
     margin: 1rem auto;
@@ -97,4 +92,15 @@ th, td {
 th {
     font-size: 1.1rem;
     font-weight: bold;
+}
+
+td > button {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0.1rem 0.8rem;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
 }
