@@ -35,6 +35,8 @@ function displayNewBook() {
     const list = document.querySelector('tbody');
     //create a new table row
     const book = document.createElement('tr');
+    //add an id to number the row
+    book.setAttribute('id', "row" + i)
     // add the book row to the DOM
     list.appendChild(book);
     //create data cells for title, author and pages
@@ -59,9 +61,12 @@ function displayNewBook() {
     const deleteCell = document.createElement('td');
     deleteCell.classList.add('delete');
     const deleteBtn = document.createElement('button');
+    //add an id to button that matches the row
+    deleteBtn.setAttribute('id', "row" + i)
     deleteBtn.textContent = "Delete";
     //append the button to deleteCell
     deleteCell.appendChild(deleteBtn);
+    updateDeleteBtn(deleteBtn.id)
 
     //append all the nodes to the table row
     book.appendChild(title);
@@ -90,7 +95,31 @@ submitButton.addEventListener('click', () => {
         deleteContent(title, author, pages, read);
         displayNewBook();
     }
-});
+})
+
+// function adds an event listener to knewly created delete Buttons
+function updateDeleteBtn (rowNum) {
+    const deleteButton = document.querySelector('#' + rowNum)
+    deleteButton.addEventListener('click', () => {
+        // select the <tr> node and remove it
+        let row = document.querySelector("tr#" + deleteButton.id)
+        row.remove()
+
+        //HAVE TO UPDATE ARRAY AND DATA FOR OTHER NODES
+        //extract the index of the erray
+        let index = deleteButton.id.slice(3)
+        myLibrary.splice(index, 1)
+        //update myLibrary.index for each Book
+        updateArrayIndex()
+    })
+}
+
+// will be called to change the myLibrary.index when a Book is deleted
+function updateArrayIndex() {
+    for (let i = 0; i < myLibrary.length - 1; i++) {
+        myLibrary[i].index = i;
+    }
+}
 
 
 //checks if input boxes are filled
@@ -167,3 +196,4 @@ function deleteContent(title, author, pages, read) {
     pages.value = null;
     read.checked = false;
 }
+
