@@ -51,6 +51,8 @@ function displayNewBook() {
     //data cell for read. read has a button inside
     const read = document.createElement('td');
     const readBtn = document.createElement('button');
+    //add an id to button so other functions can search for parent node
+    readBtn.setAttribute('id', 'row' + i)
     // default read to Not Read, but if read is checked switch it to read
     readBtn.textContent = "Not Read";
     if (myLibrary[i].read === true) readBtn.textContent = "Read";
@@ -118,10 +120,15 @@ function updateDeleteBtn (deleteBtn) {
 //function adds event listener to knewly created read button
 function updateReadBtn (readBtn) {
     readBtn.addEventListener('click', () => {
+        let i = readBtn.id.slice(3)
         if (readBtn.textContent === 'Read') {
+            myLibrary[i].read = false
             readBtn.textContent = "Not Read"
         }
-        else readBtn.textContent = "Read"
+        else {
+            myLibrary[i].read = true
+            readBtn.textContent = "Read"
+        }
     })
 }
 
