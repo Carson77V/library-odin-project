@@ -82,53 +82,63 @@ submitButton.addEventListener('click', () => {
 
 //checks if input boxes are filled
 function checkInput(title, author, pages) {
+
+    //select the parent nodes for use
+    const parentTitle = document.querySelector('.title')
+    const parentAuthor = document.querySelector('.author')
+    const parentPages = document.querySelector('.pages')
+
+    //select the input nodes
+    const inputTitle = document.querySelector('#title')
+    const inputAuthor = document.querySelector('#author')
+    const inputPages = document.querySelector('#pages')
+
+    //select warning message below each input
+    const warningTitle = document.querySelector('.title > .warning')
+    const warningAuthor = document.querySelector('.author > .warning')
+    const warningPages = document.querySelector('.pages > .warning')
+
     //boolean expressions used to validate if form has been filled
-    let validTitle = true;
-    let validAuthor = true;
-    let validPages = true;
-    if (title.value === '') {
-        //set validator to false
-        validTitle = false;
-        //select the parent node and add warning message if input is emtpy
-        const parent = document.querySelector('.title')
-        //select warning div
-        const warningTitle = document.querySelector('.title > .warning')
-        //if warning div does not exist creat and add one
-        if (!warningTitle) {
-            parent.appendChild(warning());
-        }
-    }
-    if (author.value === ''){
-        //set validator to false
-        validAuthor = false;
-        const parent2 = document.querySelector('.author')
-        const warningAuthor = document.querySelector('.author > .warning')
-        if (!warningAuthor) {
-            parent2.appendChild(warning())
-        }
-    }
-    if (pages.value <= 0) {
-        //set validator to false
-        validPages = false;
-        const parent3 = document.querySelector('.pages') 
-        const warningPages = document.querySelector('.pages > .warning')
-        if (!warningPages){
-            parent3.appendChild(warning())
-        }
-    }
+    let validTitle = validateNode(parentTitle, warningTitle, inputTitle)
+    let validAuthor = validateNode(parentAuthor, warningAuthor, inputAuthor)
+    let validPages = validateNode(parentPages, warningPages, inputPages)
+
 
     if (validTitle === true && validAuthor === true && validPages === true) {
         return true;
     }
 }
 
-//creates a node when user hasn't entered anything
-function warning() {
+function validateNode(parent, warning, input) {
+    if (warning && input.value > '') {
+        removeWarning(parent)
+        return true
+    }
+    else if (warning && input.value === '') {
+        return false
+    }
+    else if (!warning && input.value > '') {
+        return true
+    }
+    else if (!warning && input.value === '') {
+        parent.appendChild(createWarning())
+        return false
+    }
+
+}
+
+//creates a warning node
+function createWarning() {
     const warning = document.createElement('div');
     warning.classList.add('warning');
     warning.textContent = "Fill in the box!"
     warning.style.cssText = "color: red; font-size: 0.75rem;";
     return warning;
+}
+
+// removes warning label under input
+function removeWarning(parent) {
+    parent.removeChild(parent.lastElementChild);
 }
 
 //Deletes the content in input boxes
