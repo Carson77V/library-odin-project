@@ -56,6 +56,7 @@ function displayNewBook() {
     if (myLibrary[i].read === true) readBtn.textContent = "Read";
     //append the button to read
     read.appendChild(readBtn);
+    updateReadBtn(readBtn)
 
     // data cell for delete. delete cell has a button inside
     const deleteCell = document.createElement('td');
@@ -66,7 +67,7 @@ function displayNewBook() {
     deleteBtn.textContent = "Delete";
     //append the button to deleteCell
     deleteCell.appendChild(deleteBtn);
-    updateDeleteBtn(deleteBtn.id)
+    updateDeleteBtn(deleteBtn)
 
     //append all the nodes to the table row
     book.appendChild(title);
@@ -98,19 +99,29 @@ submitButton.addEventListener('click', () => {
 })
 
 // function adds an event listener to knewly created delete Buttons
-function updateDeleteBtn (rowNum) {
-    const deleteButton = document.querySelector('#' + rowNum)
-    deleteButton.addEventListener('click', () => {
+function updateDeleteBtn (deleteBtn) {
+    
+    deleteBtn.addEventListener('click', () => {
         // select the <tr> node and remove it
-        let row = document.querySelector("tr#" + deleteButton.id)
+        let row = document.querySelector("tr#" + deleteBtn.id)
         row.remove()
 
         //HAVE TO UPDATE ARRAY AND DATA FOR OTHER NODES
         //extract the index of the erray
-        let index = deleteButton.id.slice(3)
+        let index = deleteBtn.id.slice(3)
         myLibrary.splice(index, 1)
         //update myLibrary.index for each Book
         updateArrayIndex()
+    })
+}
+
+//function adds event listener to knewly created read button
+function updateReadBtn (readBtn) {
+    readBtn.addEventListener('click', () => {
+        if (readBtn.textContent === 'Read') {
+            readBtn.textContent = "Not Read"
+        }
+        else readBtn.textContent = "Read"
     })
 }
 
