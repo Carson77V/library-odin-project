@@ -72,16 +72,23 @@ submitButton.addEventListener('click', () => {
     let pages = document.querySelector('#pages');
     let read = document.querySelector('#read');
 
-    checkInput(title, author, pages);
-    addBookToLibrary();
-    deleteContent(title, author, pages, read);
-    displayNewBook();
+    if (checkInput(title, author, pages)) {
+        addBookToLibrary();
+        deleteContent(title, author, pages, read);
+        displayNewBook();
+    }
 });
 
 
 //checks if input boxes are filled
 function checkInput(title, author, pages) {
+    //boolean expressions used to validate if form has been filled
+    let validTitle = true;
+    let validAuthor = true;
+    let validPages = true;
     if (title.value === '') {
+        //set validator to false
+        validTitle = false;
         //select the parent node and add warning message if input is emtpy
         const parent = document.querySelector('.title')
         //select warning div
@@ -92,6 +99,8 @@ function checkInput(title, author, pages) {
         }
     }
     if (author.value === ''){
+        //set validator to false
+        validAuthor = false;
         const parent2 = document.querySelector('.author')
         const warningAuthor = document.querySelector('.author > .warning')
         if (!warningAuthor) {
@@ -99,11 +108,17 @@ function checkInput(title, author, pages) {
         }
     }
     if (pages.value <= 0) {
+        //set validator to false
+        validPages = false;
         const parent3 = document.querySelector('.pages') 
         const warningPages = document.querySelector('.pages > .warning')
         if (!warningPages){
             parent3.appendChild(warning())
         }
+    }
+
+    if (validTitle === true && validAuthor === true && validPages === true) {
+        return true;
     }
 }
 
