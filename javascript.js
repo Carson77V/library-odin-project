@@ -50,6 +50,7 @@ function displayNewBook() {
 
     //data cell for read. read has a button inside
     const read = document.createElement('td');
+    read.classList.add('read')
     const readBtn = document.createElement('button');
     //add an id to button so other functions can search for parent node
     readBtn.setAttribute('id', 'row' + i)
@@ -113,14 +114,16 @@ function updateDeleteBtn (deleteBtn) {
         let index = deleteBtn.id.slice(3)
         myLibrary.splice(index, 1)
         //update myLibrary.index for each Book
-        updateArrayIndex()
+        updateIndex()
     })
 }
 
 //function adds event listener to knewly created read button
 function updateReadBtn (readBtn) {
     readBtn.addEventListener('click', () => {
+        // get index to search array
         let i = readBtn.id.slice(3)
+        //modify button and object
         if (readBtn.textContent === 'Read') {
             myLibrary[i].read = false
             readBtn.textContent = "Not Read"
@@ -133,10 +136,35 @@ function updateReadBtn (readBtn) {
 }
 
 // will be called to change the myLibrary.index when a Book is deleted
-function updateArrayIndex() {
+// function also changes the id of the node to match array index
+function updateIndex() {
     for (let i = 0; i < myLibrary.length - 1; i++) {
         myLibrary[i].index = i;
     }
+    //create node list of all rows
+    let tableRow = document.querySelectorAll('tr')
+    // set starting index to 0
+    let i = 0
+    //true if <thead> 
+    let thead = true
+    //loop through node list
+    tableRow.forEach(function(ele) {
+        if (thead) {
+            thead = false
+            return
+        }
+        ele.id = 'row' + i
+        let delDiv = ele.querySelector('.delete')
+        let readDiv = ele.querySelector('.read')
+
+        //select the read and delete buttons
+        let delBtn = delDiv.firstElementChild
+        let readBtn = readDiv.firstElementChild
+        //change the id's of the read and delete button
+        delBtn.id = ele.id
+        readBtn.id = ele.id
+        i++
+    })
 }
 
 
