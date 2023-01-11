@@ -2,12 +2,44 @@
 let myLibrary = [];
 
 // constructor for book object
-function Book(title, author, pages, read) {
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.read = read
-    //index to find Book in array added later
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+    get title() {
+        return this._title
+    }
+    set title(val) {
+        this._title = val
+    }
+    get author() {
+        return this._author
+    }
+    set author(val) {
+        this._author = val
+    }
+    get pages() {
+        return this._pages
+    }
+    set pages(val) {
+        this._pages = val
+    }
+    get read() {
+        return this._read
+    }
+    set read(bool) {
+        this._read = bool
+    }
+    get index() {
+        return this._index
+    }
+    set index(val) {
+        this._index = val
+    }
 }
 
 //Function reads the data from the inputs and uses a constructor to 
