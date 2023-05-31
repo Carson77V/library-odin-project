@@ -120,3 +120,8 @@ button:hover {
 .delete > button:hover {
     background-color: #dd2222;
 }
+
+.warning {
+    color: red;
+    font-size: 0.75rem; 
+}

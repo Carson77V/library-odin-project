@@ -114,22 +114,22 @@ function displayNewBook() {
     
 }
 
-//Event that takes place when submit button is clicked
-const submitButton = document.querySelector('.submit > button');
-submitButton.addEventListener('click', () => {
-    //prevent the button from submitting anything
-    event.preventDefault();
-    //Select all the dom elements that will be saved
-    let title = document.querySelector('#title');
-    let author = document.querySelector('#author');
-    let pages = document.querySelector('#pages');
-    let read = document.querySelector('#read');
+// Input and error boxes for the form
+const titleInput = document.querySelector("#title")
+const titleError = document.querySelector('#title + span.warning')
+const authorInput = document.querySelector('#author')
+const authorError = document.querySelector('#author + span.warning')
+const pageInput = document.querySelector('#pages')
+const pageError = document.querySelector('#pages + span.warning')
+const form = document.querySelector('form')
 
-    // If all the inputs are filled add the book to library
-    if (checkInput(title, author, pages)) {
-        addBookToLibrary();
-        deleteContent(title, author, pages, read);
-        displayNewBook();
+//Event that takes place when submit button is clicked
+form.addEventListener('submit', () => {
+    validTitle()
+    validAuthor()
+    validPage()
+    if (!validTitle() || !validAuthor() || !validPage()) {
+        event.preventDefault()
     }
 })
 
@@ -199,73 +199,6 @@ function updateIndex() {
     })
 }
 
-
-//checks if input boxes are filled
-function checkInput(title, author, pages) {
-
-    //select the parent nodes
-    const parentTitle = document.querySelector('.title')
-    const parentAuthor = document.querySelector('.author')
-    const parentPages = document.querySelector('.pages')
-
-    //select the input nodes
-    const inputTitle = document.querySelector('#title')
-    const inputAuthor = document.querySelector('#author')
-    const inputPages = document.querySelector('#pages')
-
-    //select warning message below each input
-    const warningTitle = document.querySelector('.title > .warning')
-    const warningAuthor = document.querySelector('.author > .warning')
-    const warningPages = document.querySelector('.pages > .warning')
-
-    //boolean expressions used to validate if form has been filled
-    let validTitle = validateNode(parentTitle, warningTitle, inputTitle)
-    let validAuthor = validateNode(parentAuthor, warningAuthor, inputAuthor)
-    let validPages = validateNode(parentPages, warningPages, inputPages)
-
-    //If all inputs are filled out return true
-    if (validTitle === true && validAuthor === true && validPages === true) {
-        return true;
-    }
-}
-
-// returns a boolean expression to validate if input is filled
-function validateNode(parent, warning, input) {
-    // remove the warning node because input is fille
-    if (warning && input.value > '') {
-        removeWarning(parent)
-        return true
-    }
-    //return false if warning exists and input is empty
-    else if (warning && input.value === '') {
-        return false
-    }
-    // return true if input is empty and warning node does not exist
-    else if (!warning && input.value > '') {
-        return true
-    }
-    //add warning node because it does not exist and input is empty
-    else if (!warning && input.value === '') {
-        parent.appendChild(createWarning())
-        return false
-    }
-
-}
-
-//creates a warning node
-function createWarning() {
-    const warning = document.createElement('div');
-    warning.classList.add('warning');
-    warning.textContent = "Fill in the box!"
-    warning.style.cssText = "color: red; font-size: 0.75rem;";
-    return warning;
-}
-
-// removes warning label under input
-function removeWarning(parent) {
-    parent.removeChild(parent.lastElementChild);
-}
-
 //Deletes the content in input boxes
 function deleteContent(title, author, pages, read) {
     //set all values to null and checkbox to false
@@ -275,3 +208,68 @@ function deleteContent(title, author, pages, read) {
     read.checked = false;
 }
 
+titleInput.addEventListener('input', () => {
+    validTitle()
+})
+
+authorInput.addEventListener('input', () => {
+    validAuthor()
+})
+
+pageInput.addEventListener('input', () => {
+    validPage()
+})
+
+function validTitle() {
+    if (titleInput.validity.valid) {
+        titleError.textContent = ''
+        titleError.className = 'warning'
+        return true
+    }
+    else if (titleInput.validity.valueMissing) {
+        titleError.textContent = "Fill in the box!"
+        titleError.className = "warning active"
+        return false
+    }
+    else if (titleInput.validity.tooLong) {
+        titleError.textContent = "Value is too long!"
+        titleError.className = 'warning active'
+        return false
+    }
+}
+
+function validAuthor() {
+    if (authorInput.validity.valid) {
+        authorError.textContent = ''
+        authorError.className = 'warning'
+        return true
+    }
+    else if (authorInput.validity.valueMissing) {
+        authorError.textContent = "Fill in the box!"
+        authorError.className = "warning active"
+        return false
+    }
+    else if (authorInput.validity.tooLong) {
+        authorError.textContent = "Value is too long!"
+        authorError.className = 'warning active'
+        return false
+    }
+}
+
+function validPage() {
+    if (pageInput.validity.valid) {
+        pageError.textContent = ''
+        pageError.className = 'warning'
+        return true
+    }
+    else if (pageInput.validity.valueMissing) {
+        pageError.textContent = "Fill in the box!"
+        pageError.className = "warning active"
+        return false
+    }
+    else if (pageInput.validity.tooLong) {
+        pageError.textContent = "Too many pages!"
+        pageError.className = 'warning active'
+        return false
+    }
+}

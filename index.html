@@ -14,19 +14,22 @@
     <p>Control your own personal library by adding or removing books</p>
   </header>
 
-  <form action="" method="post">
+  <form action="" method="post" novalidate>
     <div class="form-flex">
       <div class="title">
         <label for="title">Title</label>
-        <input type="text" id="title" name="book-title" required>
+        <input type="text" id="title" name="book-title" maxlength="50" required>
+        <span class="warning"></span>
       </div>
       <div class="author">
         <label for="author">Author</label>
-        <input type="text" id="author" name="author-name" required>
+        <input type="text" id="author" name="author-name" maxlength="30" required>
+        <span class="warning"></span>
       </div>
       <div class="pages">
         <label for="pages">Pages</label>
-        <input type="number" id="pages" name="page-count" required>
+        <input type="number" id="pages" name="page-count" max="21450" required>
+        <span class="warning"></span>
       </div>
       <div>
         <label for="read">Have you read it?</label>
